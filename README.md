@@ -13,7 +13,7 @@ CloudPort is a serverless event registration portal built on Google Cloud Platfo
 
 ## 🏗️ System Architecture & Data Flow
 
-```mermaid
+```
   ┌─────────────────────────────────────────────────────────────────────────┐
   │                            FRONTEND TIER                                │
   │  ┌───────────────────────────────────────────────────────────────────┐  │
