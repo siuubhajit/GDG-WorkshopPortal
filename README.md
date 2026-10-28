@@ -7,7 +7,6 @@ CloudPort is a serverless event registration portal built on Google Cloud Platfo
 ## 🌐 Live Deliverable Endpoints
 
 * **Live Website URL**: [https://storage.googleapis.com/cloudport-site-31094/index.html](https://storage.googleapis.com/cloudport-site-31094/index.html)
-* **Live Cloud Function Endpoint**: [https://cloudport-backend-g2o2wbx2eq-el.a.run.app](https://cloudport-backend-g2o2wbx2eq-el.a.run.app)
 
 ---
 
