@@ -1,12 +1,10 @@
 import functions_framework
 from google.cloud import firestore
 
-# Explicitly initialize Firestore client with project ID
 db = firestore.Client(project='cloudport-project')
 
 @functions_framework.http
 def cloudport_handler(request):
-    # CORS preflight options check
     if request.method == 'OPTIONS':
         headers = {
             'Access-Control-Allow-Origin': '*',
@@ -26,7 +24,7 @@ def cloudport_handler(request):
         return ({'error': 'Invalid JSON payload'}, 400, headers)
 
     name = request_json.get('name', '').strip()
-    email = request_json.get('email', '').strip()
+    email = request_json.get('email', '').strip().lower()
     department = request_json.get('department', '').strip()
     interest = request_json.get('interest', '').strip()
 
@@ -34,6 +32,12 @@ def cloudport_handler(request):
         return ({'error': 'Missing required fields'}, 400, headers)
 
     try:
+        # Check if email already exists in the registrations collection
+        existing_docs = db.collection('registrations').where('email', '==', email).limit(1).get()
+        if len(existing_docs) > 0:
+            return ({'error': 'This email address is already registered.'}, 400, headers)
+
+        # Save new unique registration
         doc_ref = db.collection('registrations').add({
             'name': name,
             'email': email,
